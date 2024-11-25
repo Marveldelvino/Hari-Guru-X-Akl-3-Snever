@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hari Guru Perempuan</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf6f900;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            background-image: url(https://i.ibb.co.com/kBy0qtP/jepang.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        #container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.973);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #typing-text {
+            font-size: 1.5rem;
+            color: #ff6f91;
+            border-right: 2px solid #ff6f91;
+            white-space: pre-wrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: typing 3s steps(30, end), blink 0.7s step-end infinite alternate;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from { border-color: transparent; }
+            to { border-color: #ff6f91; }
+        }
+
+        .button {
+            display: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff6f91;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ff4b6e;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .blur {
+            filter: blur(5px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        th {
+            background-color: #ff6f91;
+            color: white;
+        }
+
+        td {
+            background-color: #fce4ec;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-yes, .btn-no {
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 45%;
+        }
+
+        .btn-yes {
+            background-color: #ff6f91;
+        }
+
+        .btn-no {
+            background-color: #f8bbd0;
+        }
+
+        .btn-no:hover {
+            background-color: #f48fb1;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        /* Responsif untuk perangkat kecil */
+        @media (max-width: 600px) {
+            #typing-text {
+                font-size: 1.2rem;
+            }
+
+            .button, .btn-yes, .btn-no {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            .modal {
+                width: 90%;
+                padding: 15px;
+            }
+
+            table {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- GIF di atas teks ketikan -->
+        <div class="gif-container">
+            <img src="https://feeldreams.github.io/pandaputih.gif" alt="GIF Panda Lucu" class="panda-gif" style="max-width: 100%; height: auto;">
+        </div>
+
+        <!-- Efek typing -->
+        <div id="typing-text">Selamat Hari Guru! Terima kasih atas dedikasi Anda yang luar biasa.</div>
+
+        <!-- Tombol Mulai -->
+        <button class="button" id="start-btn" onclick="startQuestions()">Mulai</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <table>
+            <tr>
+                <th>Pertanyaan</th>
+            </tr>
+            <tr>
+                <td id="question-text">Apakah Anda bangga menjadi seorang guru?</td>
+            </tr>
+        </table>
+        <div class="btn-container">
+            <button class="btn-yes" onclick="nextQuestion()">Iya</button>
+            <button class="btn-no" onclick="moveNoButton()">Tidak</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            "Apakah Anda bangga menjadi seorang guru?",
+            "Apakah Ibu Suka Menjadi Wali Kelas Kami?",
+            "Apakah Anda ingin terus menginspirasi generasi berikutnya?"
+        ];
+        let currentQuestion = 0;
+
+        // Fungsi untuk memulai pertanyaan setelah typing selesai
+        function startQuestions() {
+            document.getElementById('container').classList.add('blur');
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById('question-text').innerText = questions[currentQuestion];
+            } else {
+                // Alihkan ke file xakl3.html setelah semua pertanyaan selesai
+                window.location.href = './kelasxakl3.html';
+            }
+        }
+
+        function moveNoButton() {
+            const noButton = document.querySelector('.btn-no');
+            const randomX = Math.random() * 40 - 20;
+            const randomY = Math.random() * 40 - 20;
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // Fungsi untuk memulai efek ketik
+        window.onload = function() {
+            let typingElement = document.getElementById('typing-text');
+            let text = typingElement.innerText;
+            typingElement.innerText = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    typingElement.innerText += text.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                } else {
+                    document.getElementById('start-btn').style.display = 'inline-block';
+                }
+            }
+            type();
+        };
+    </script>
+</body>
+</html>
